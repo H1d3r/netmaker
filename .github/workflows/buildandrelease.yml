@@ -38,7 +38,18 @@ jobs:
           env GOOS=linux GOARCH=arm GOARM=5 go build -o build/netclient-arm5/netclient main.go
           env GOOS=linux GOARCH=arm GOARM=6 go build -o build/netclient-arm6/netclient main.go
           env GOOS=linux GOARCH=arm GOARM=7 go build -o build/netclient-arm7/netclient main.go
-          env GOOS=linux GOARCH=arm64 go build -o build/netclient-arm64/netcient main.go
+          env GOOS=linux GOARCH=arm64 go build -o build/netclient-arm64/netclient main.go
+  
+      - name: Upload x86 to Release
+        #if: github.event.inputs.version == ''
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: netclient/build/netclient
+          tag: ${{ env.NETMAKER_VERSION }}
+          overwrite: true
+          prerelease: true
+          asset_name: netclient
 
       - name: Upload arm5 to Release
         #if: github.event.inputs.version == ''
@@ -84,13 +95,4 @@ jobs:
           prerelease: true
           asset_name: netclient-arm64
 
-      - name: Upload x86 to Release
-        #if: github.event.inputs.version == ''
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: netclient/build/netclient
-          tag: ${{ env.NETMAKER_VERSION }}
-          overwrite: true
-          prerelease: true
-          asset_name: netclient
+     
