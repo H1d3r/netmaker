@@ -34,7 +34,7 @@ jobs:
       - name: Build
         run: |
           cd netclient
-          env GOOS=linux GOARCH=amd64 go build -o build/netclient/netclient main.go
+          env GOOS=linux GOARCH=amd64 go build -o build/netclient main.go
           env GOOS=linux GOARCH=arm GOARM=5 go build -o build/netclient-arm5/netclient main.go
           env GOOS=linux GOARCH=arm GOARM=6 go build -o build/netclient-arm6/netclient main.go
           env GOOS=linux GOARCH=arm GOARM=7 go build -o build/netclient-arm7/netclient main.go
