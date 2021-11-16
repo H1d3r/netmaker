@@ -42,5 +42,6 @@ jobs:
         with:
           context: .
           platforms: linux/amd64, linux/arm64
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: gravitl/netmaker:${{ env.TAG }}
+          push: true
+          tags: ${{ github.repository }}:${{ env.TAG }}
+          

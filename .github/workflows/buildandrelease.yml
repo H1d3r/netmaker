@@ -20,7 +20,7 @@ jobs:
           if [[ -n "${{ github.event.inputs.version }}" ]]; then
             NETMAKER_VERSION=${{ github.event.inputs.version }}
           else
-            NETMAKER_VERSION=$(curl -fsSL https://api.github.com/repos/gravitl/netmaker/tags | grep 'name' | head -1 | cut -d'"' -f4)
+            NETMAKER_VERSION=$(curl -fsSL https://api.github.com/repos/mattkasun/netmaker/tags | grep 'name' | head -1 | cut -d'"' -f4)
           fi
           echo "NETMAKER_VERSION=${NETMAKER_VERSION}" >> $GITHUB_ENV
       - name: Checkout
@@ -39,7 +39,6 @@ jobs:
           env GOOS=linux GOARCH=arm GOARM=6 go build -o build/netclient-arm6/netclient main.go
           env GOOS=linux GOARCH=arm GOARM=7 go build -o build/netclient-arm7/netclient main.go
           env GOOS=linux GOARCH=arm64 go build -o build/netclient-arm64/netclient main.go
-
       - name: Upload x86 to Release
         uses: svenstaro/upload-release-action@v2
         with:
